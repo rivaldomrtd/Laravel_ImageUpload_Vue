@@ -18,3 +18,4 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 Route::apiResource('/users', App\Http\Controllers\Api\UserController::class);
+Route::apiResource('/artikel', App\Http\Controllers\Api\PostController::class);

@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Client\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 class UserController extends Controller
 {
@@ -14,8 +13,6 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
-
-
     public function show(Request $request)
     {
         return Inertia::render('Profile', [
@@ -23,29 +20,27 @@ class UserController extends Controller
         ]);
     }
 
-    public function edit(User $id)
+    public function edit(User $user)
     {
-        $user = User::find($id);
         return Inertia::render('Profile', [
-            'users' => $user,
+            'user' => [
+                'id' => $user->id,
+                'name' => $user->title,
+                'username' => $user->description,
+                'email' => $user->description
+            ]
         ]);
     }
 
     public function update(User $user)
     {
-        $this->validate(request(), [
+
+        $data = Request::validate([
             'name' => 'required',
             'username' => 'required'|'alpha_num'|'unique:users,username',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6|confirmed'
+            'email' => 'required|email|unique:users'
         ]);
-
-        $user->name = request('name');
-        $user->email = request('username');
-        $user->email = request('email');
-        $user->password = bcrypt(request('password'));
-
-        $user->save();
-        return back();
+        $data->update($data);
+        return Redirect::route('users.index');
     }
 }

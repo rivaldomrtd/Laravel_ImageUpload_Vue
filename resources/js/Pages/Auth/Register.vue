@@ -40,7 +40,7 @@ const submit = () => {
                 <div class="mt-4">
                     <InputLabel for="username" value="Username" />
                     <TextInput id="username" type="text" class="mt-1 block w-full" v-model="form.username" required
-                        autofocus autocomplete="username" />
+                         autocomplete="username" />
                     <InputError class="mt-2" :message="form.errors.name" />
                 </div>
 

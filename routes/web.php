@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\ImageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,13 +31,17 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-//images
-Route::get('file-upload', [FileController::class, 'index'])->name('file.upload');
-Route::post('file-upload', [FileController::class, 'store'])->name('file.upload.store');
-
 //profile
-//Route::get('user/profile', [UserController::class, 'show'])->name('profile');
+Route::resource('users', UserController::class);
 Route::get('user/edit', [UserController::class, 'edit'])->name('profile');
-Route::get('user/profile-update', [UserController::class, 'update'])->name('profile.update');
+
+//Artikel
+Route::get('user/artikel', [PostController::class, 'index'])->name('artikel');
+Route::resource('posts', PostController::class);
+
+//images
+Route::get('user/image', [ImageController::class, 'index'])->name('image');
+Route::resource('images', ImageController::class);
+
 
 require __DIR__.'/auth.php';
