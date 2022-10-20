@@ -1,6 +1,6 @@
 <p align="center">
  <img src="/public/uploads/logo.png">
- <img src="/public/uploads/voos.png">
+ <img src="/public/uploads/vdoos.png">
 </p>
 
 <p align="center">
