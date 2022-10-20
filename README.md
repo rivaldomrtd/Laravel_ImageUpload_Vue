@@ -1,5 +1,6 @@
 <p align="center">
  <img src="/public/uploads/logo.png">
+ <img src="/public/uploads/voos.png">
 </p>
 
 <p align="center">
